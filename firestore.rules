@@ -1,0 +1,17 @@
+rules_version = '2';
+
+service cloud.firestore {
+
+  match /databases/{database}/documents {
+
+    // Cada usuario solo puede leer y escribir su propio documento,
+    // ubicado en /usuarios/{su-uid}
+    match /usuarios/{userId} {
+
+      allow read, write: if request.auth != null && request.auth.uid == userId;
+
+    }
+
+  }
+
+}

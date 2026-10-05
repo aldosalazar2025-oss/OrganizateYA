@@ -1,0 +1,625 @@
+/* =====================================================
+   TAREAS
+   DISEÑO MEJORADO — INICIO / ESTADÍSTICAS / TAREAS / TABLA
+   Animaciones, sombras y efectos visuales
+===================================================== */
+
+/*=========================================================
+    VARIABLES EXTRA DE DISEÑO
+=========================================================*/
+
+:root{
+
+    --glow-blue:   rgba(37,99,235,.35);
+    --glow-green:  rgba(16,185,129,.35);
+    --glow-orange: rgba(245,158,11,.35);
+    --glow-cyan:   rgba(6,182,212,.35);
+    --glow-purple: rgba(139,92,246,.35);
+
+    --ease-bounce: cubic-bezier(.34,1.56,.64,1);
+    --ease-smooth: cubic-bezier(.16,1,.3,1);
+
+}
+
+/*=========================================================
+    ENTRADA ESCALONADA GENERAL
+=========================================================*/
+
+@keyframes riseIn{
+
+    from{
+        opacity:0;
+        transform:translateY(24px) scale(.98);
+    }
+
+    to{
+        opacity:1;
+        transform:translateY(0) scale(1);
+    }
+
+}
+
+@keyframes floatSoft{
+
+    0%,100%{ transform:translateY(0); }
+    50%{ transform:translateY(-4px); }
+
+}
+
+@keyframes shimmerSweep{
+
+    0%{ background-position:-200% 0; }
+    100%{ background-position:200% 0; }
+
+}
+
+@keyframes gradientShift{
+
+    0%{ background-position:0% 50%; }
+    50%{ background-position:100% 50%; }
+    100%{ background-position:0% 50%; }
+
+}
+
+@keyframes popIn{
+
+    0%{ transform:scale(.85); opacity:0; }
+    60%{ transform:scale(1.05); opacity:1; }
+    100%{ transform:scale(1); }
+
+}
+
+@keyframes ringPulse{
+
+    0%{ box-shadow:0 0 0 0 rgba(37,99,235,.45); }
+    100%{ box-shadow:0 0 0 14px rgba(37,99,235,0); }
+
+}
+
+/*=========================================================
+    ESTADÍSTICAS — TARJETAS DEL DASHBOARD
+=========================================================*/
+
+.dashboard{
+
+    perspective:1200px;
+
+}
+
+.dashboard .card{
+
+    animation:riseIn .55s var(--ease-smooth) both;
+    background:linear-gradient(160deg,var(--card-bg) 0%,var(--surface-2) 130%);
+    border:1px solid rgba(148,163,184,.12);
+    box-shadow:var(--card-shadow);
+    transform-style:preserve-3d;
+    will-change:transform;
+}
+
+.dashboard .card:nth-child(1){ animation-delay:.02s; }
+.dashboard .card:nth-child(2){ animation-delay:.09s; }
+.dashboard .card:nth-child(3){ animation-delay:.16s; }
+.dashboard .card:nth-child(4){ animation-delay:.23s; }
+.dashboard .card:nth-child(5){ animation-delay:.30s; }
+
+.dashboard .card::before{
+
+    height:100%;
+    width:5px;
+    top:0;
+    left:0;
+    opacity:.9;
+    transition:width .35s var(--ease-smooth);
+
+}
+
+.dashboard .card::after{
+
+    content:"";
+    position:absolute;
+    top:-40%;
+    right:-40%;
+    width:140px;
+    height:140px;
+    border-radius:50%;
+    background:radial-gradient(circle,currentColor 0%,transparent 70%);
+    opacity:.06;
+    pointer-events:none;
+    transition:transform .5s var(--ease-smooth);
+}
+
+.dashboard .card:nth-child(1){ color:#2563EB; }
+.dashboard .card:nth-child(2){ color:#10B981; }
+.dashboard .card:nth-child(3){ color:#F59E0B; }
+.dashboard .card:nth-child(4){ color:#06B6D4; }
+.dashboard .card:nth-child(5){ color:#8B5CF6; }
+
+.dashboard .card:hover{
+
+    transform:translateY(-10px) rotateX(3deg) rotateY(-2deg) scale(1.02);
+    box-shadow:0 22px 45px -10px rgba(15,23,42,.22),
+               0 0 0 1px rgba(148,163,184,.15),
+               0 0 30px -6px currentColor;
+
+}
+
+.dashboard .card:hover::before{
+
+    width:7px;
+
+}
+
+.dashboard .card:hover::after{
+
+    transform:scale(1.6);
+    opacity:.12;
+
+}
+
+.dashboard .card i{
+
+    display:inline-flex;
+    align-items:center;
+    justify-content:center;
+    width:56px;
+    height:56px;
+    border-radius:16px;
+    background:currentColor;
+    position:relative;
+    box-shadow:0 10px 20px -6px currentColor;
+    transition:transform .4s var(--ease-bounce);
+
+}
+
+.dashboard .card i::before{
+
+    color:#fff;
+    position:relative;
+    z-index:1;
+
+}
+
+.dashboard .card:hover i{
+
+    transform:scale(1.12) rotate(-6deg);
+
+}
+
+.dashboard .card span{
+
+    transition:letter-spacing .3s ease;
+
+}
+
+.dashboard .card:hover span{
+
+    letter-spacing:.5px;
+
+}
+
+/*=========================================================
+    BARRA DE PROGRESO GENERAL
+=========================================================*/
+
+.progress-container{
+
+    animation:riseIn .55s var(--ease-smooth) both;
+    animation-delay:.1s;
+    position:relative;
+    overflow:hidden;
+
+}
+
+.progress{
+
+    position:relative;
+    box-shadow:inset 0 2px 6px rgba(0,0,0,.08);
+
+}
+
+.progress-bar{
+
+    background:linear-gradient(90deg,#2563EB,#38BDF8,#06B6D4,#2563EB);
+    background-size:300% 100%;
+    animation:gradientShift 4s ease infinite;
+    position:relative;
+    box-shadow:0 0 14px var(--glow-blue);
+
+}
+
+.progress-bar::after{
+
+    content:"";
+    position:absolute;
+    inset:0;
+    background:linear-gradient(110deg,transparent 30%,rgba(255,255,255,.55) 50%,transparent 70%);
+    background-size:200% 100%;
+    animation:shimmerSweep 2.2s linear infinite;
+
+}
+
+/*=========================================================
+    INICIO — TAREAS DE HOY / VISTA SEMANAL
+=========================================================*/
+
+.home-container .widget{
+
+    animation:riseIn .55s var(--ease-smooth) both;
+    box-shadow:var(--card-shadow);
+    border:2px solid var(--border);
+    transition:box-shadow .35s ease,transform .35s ease,border-color .35s ease;
+
+}
+
+.home-container .widget:hover{
+
+    box-shadow:0 20px 45px -12px rgba(15,23,42,.16);
+    border-color:rgba(37,99,235,.3);
+
+}
+
+.home-today{ animation-delay:.05s; }
+.home-week{ animation-delay:.15s; }
+
+.home-today-header h2,
+.home-week h2{
+
+    position:relative;
+    display:inline-block;
+
+}
+
+.today-item{
+
+    border:1px solid rgba(148,163,184,.10);
+    box-shadow:0 2px 8px rgba(15,23,42,.04);
+    position:relative;
+    overflow:hidden;
+    animation:riseIn .4s var(--ease-smooth) both;
+
+}
+
+.today-item::before{
+
+    content:"";
+    position:absolute;
+    left:0;
+    top:0;
+    height:100%;
+    width:4px;
+    background:linear-gradient(180deg,var(--primary),var(--secondary));
+    opacity:0;
+    transition:opacity .3s ease;
+
+}
+
+.today-item:hover{
+
+    transform:translateX(6px) translateY(-2px);
+    box-shadow:0 10px 25px -8px rgba(37,99,235,.25);
+    border-color:rgba(37,99,235,.25);
+
+}
+
+.today-item:hover::before{
+
+    opacity:1;
+
+}
+
+.today-check{
+
+    box-shadow:0 4px 10px rgba(22,163,74,.25);
+
+}
+
+.today-check:hover{
+
+    transform:scale(1.15) rotate(8deg);
+    box-shadow:0 6px 16px rgba(22,163,74,.4);
+
+}
+
+.today-check:active{
+
+    animation:ringPulse .5s ease;
+
+}
+
+/* Píldoras semanales con degradados vivos por día */
+
+.week-pill{
+
+    position:relative;
+    overflow:hidden;
+    box-shadow:0 6px 16px -4px rgba(15,23,42,.12);
+    animation:riseIn .4s var(--ease-smooth) both;
+}
+
+.week-pill::after{
+
+    content:"";
+    position:absolute;
+    inset:0;
+    background:linear-gradient(110deg,transparent 30%,rgba(255,255,255,.35) 50%,transparent 70%);
+    background-size:220% 100%;
+    background-position:200% 0;
+    transition:background-position .6s ease;
+    pointer-events:none;
+
+}
+
+.week-pill:hover::after{
+
+    background-position:-20% 0;
+
+}
+
+.week-pill:hover{
+
+    transform:translateX(8px) scale(1.015);
+    box-shadow:0 12px 26px -6px rgba(15,23,42,.22);
+
+}
+
+.week-pill:nth-child(1){ background:linear-gradient(120deg,#FCA5A5,#F87171); }
+.week-pill:nth-child(2){ background:linear-gradient(120deg,#FDBA74,#FB923C); }
+.week-pill:nth-child(3){ background:linear-gradient(120deg,#FDE68A,#FACC15); }
+.week-pill:nth-child(4){ background:linear-gradient(120deg,#86EFAC,#4ADE80); }
+.week-pill:nth-child(5){ background:linear-gradient(120deg,#93C5FD,#60A5FA); }
+.week-pill:nth-child(6){ background:linear-gradient(120deg,#C4B5FD,#A78BFA); }
+.week-pill:nth-child(7){ background:linear-gradient(120deg,#F9A8D4,#F472B6); }
+
+.week-pill-count{
+
+    box-shadow:inset 0 0 0 1px rgba(255,255,255,.5);
+    transition:transform .3s var(--ease-bounce);
+
+}
+
+.week-pill:hover .week-pill-count{
+
+    transform:scale(1.12);
+
+}
+
+/*=========================================================
+    CALENDARIO / TABLA SEMANAL
+=========================================================*/
+
+.calendar-container{
+
+    animation:riseIn .55s var(--ease-smooth) both;
+    border:2px solid var(--border);
+    position:relative;
+
+}
+
+.calendar-day{
+
+    border:1px solid rgba(148,163,184,.10);
+    transition:transform .3s var(--ease-smooth),box-shadow .3s ease,border-color .3s ease;
+    animation:riseIn .45s var(--ease-smooth) both;
+
+}
+
+.calendar-day:nth-child(1){ animation-delay:.02s; }
+.calendar-day:nth-child(2){ animation-delay:.06s; }
+.calendar-day:nth-child(3){ animation-delay:.10s; }
+.calendar-day:nth-child(4){ animation-delay:.14s; }
+.calendar-day:nth-child(5){ animation-delay:.18s; }
+.calendar-day:nth-child(6){ animation-delay:.22s; }
+.calendar-day:nth-child(7){ animation-delay:.26s; }
+
+.calendar-day:hover{
+
+    transform:translateY(-6px);
+    box-shadow:0 16px 30px -10px rgba(15,23,42,.18);
+    border-color:rgba(37,99,235,.3);
+
+}
+
+.calendar-day h3{
+
+    padding-bottom:8px;
+    border-bottom:2px solid var(--border);
+    transition:border-color .3s ease;
+
+}
+
+.calendar-day:hover h3{
+
+    border-color:var(--primary);
+
+}
+
+.calendar-item{
+
+    transition:transform .25s var(--ease-smooth),box-shadow .25s ease;
+
+}
+
+.calendar-item:hover{
+
+    transform:translateX(4px) scale(1.03);
+    box-shadow:0 8px 16px -4px rgba(15,23,42,.15);
+
+}
+
+.calendar-dot{
+
+    box-shadow:0 0 0 3px rgba(0,0,0,.04);
+    animation:floatSoft 2.4s ease-in-out infinite;
+
+}
+
+/*=========================================================
+    TAREAS — TARJETAS DE TAREA
+=========================================================*/
+
+.task-card{
+
+    border:2px solid var(--border);
+    position:relative;
+    overflow:hidden;
+
+}
+
+.task-card::before{
+
+    content:"";
+    position:absolute;
+    inset:0;
+    background:radial-gradient(600px circle at var(--mx,50%) var(--my,0%),rgba(37,99,235,.06),transparent 40%);
+    opacity:0;
+    transition:opacity .35s ease;
+    pointer-events:none;
+
+}
+
+.task-card:hover::before{
+
+    opacity:1;
+
+}
+
+.task-card:hover{
+
+    transform:translateY(-8px) scale(1.01);
+    box-shadow:0 24px 48px -14px rgba(15,23,42,.22),
+               0 0 0 1px rgba(148,163,184,.12);
+    border-color:rgba(37,99,235,.2);
+
+}
+
+.task-title{
+
+    transition:color .25s ease;
+
+}
+
+.task-card:hover .task-title{
+
+    color:var(--primary);
+
+}
+
+.badge{
+
+    transition:transform .25s var(--ease-bounce),box-shadow .25s ease;
+
+}
+
+.task-card:hover .badge{
+
+    box-shadow:0 4px 10px -2px rgba(0,0,0,.12);
+
+}
+
+.badge:hover{
+
+    transform:translateY(-2px) scale(1.06);
+
+}
+
+.task-actions button{
+
+    box-shadow:0 4px 10px -3px rgba(0,0,0,.1);
+
+}
+
+.task-actions button:hover{
+
+    transform:translateY(-4px) scale(1.1);
+
+}
+
+.task-actions button:active{
+
+    transform:scale(.92);
+
+}
+
+.task-completed{
+
+    position:relative;
+
+}
+
+.task-completed::before{
+
+    content:"";
+    position:absolute;
+    inset:0;
+    background:linear-gradient(115deg,transparent 40%,rgba(16,185,129,.06) 50%,transparent 60%);
+    pointer-events:none;
+
+}
+
+/*=========================================================
+    FILTROS
+=========================================================*/
+
+#filtersContainer{
+
+    animation:riseIn .5s var(--ease-smooth) both;
+    border:2px solid var(--border);
+
+}
+
+.filter-group input,
+.filter-group select{
+
+    transition:box-shadow .25s ease,border-color .25s ease,transform .2s ease;
+
+}
+
+.filter-group input:hover,
+.filter-group select:hover{
+
+    border-color:var(--primary);
+
+}
+
+.filter-group input:focus,
+.filter-group select:focus{
+
+    transform:translateY(-2px);
+
+}
+
+/*=========================================================
+    ESTADO VACÍO
+=========================================================*/
+
+.empty{
+
+    animation:riseIn .5s var(--ease-smooth) both;
+    border:1px dashed rgba(148,163,184,.25);
+
+}
+
+.empty i{
+
+    display:inline-block;
+    animation:floatSoft 2.6s ease-in-out infinite;
+
+}
+
+/*=========================================================
+    ACCESIBILIDAD — MENOS MOVIMIENTO
+=========================================================*/
+
+@media (prefers-reduced-motion:reduce){
+
+    *,
+    *::before,
+    *::after{
+
+        animation-duration:.001ms !important;
+        animation-iteration-count:1 !important;
+        transition-duration:.001ms !important;
+
+    }
+
+}

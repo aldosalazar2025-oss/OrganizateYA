@@ -1,0 +1,873 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+
+    <meta name="description"
+          content="Tareas - Sistema Web de Gestión de Tareas">
+
+    <meta name="author"
+          content="Tareas">
+
+    <!-- PWA / Android -->
+
+    <meta name="theme-color" content="#2563EB">
+
+    <meta name="mobile-web-app-capable" content="yes">
+
+    <meta name="apple-mobile-web-app-capable" content="yes">
+
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+
+    <link rel="manifest" href="manifest.json">
+
+    <title>Tareas | Sistema Web de Gestión de Tareas</title>
+
+    <!-- Google Fonts -->
+
+    <link rel="preconnect"
+          href="https://fonts.googleapis.com">
+
+    <link rel="preconnect"
+          href="https://fonts.gstatic.com"
+          crossorigin>
+
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+          rel="stylesheet">
+
+    <!-- Font Awesome -->
+
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+
+    <!-- SweetAlert2 -->
+
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+    <!-- SheetJS (Excel) -->
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
+
+    <!-- jsPDF + AutoTable (PDF) -->
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.8.2/jspdf.plugin.autotable.min.js"></script>
+
+    <!-- CSS -->
+
+    <link rel="stylesheet" href="css/variables.css">
+
+    <link rel="stylesheet" href="css/style.css">
+
+    <link rel="stylesheet" href="css/components.css">
+
+    <link rel="stylesheet" href="css/modal.css">
+
+    <link rel="stylesheet" href="css/dashboard.css">
+
+    <link rel="stylesheet" href="css/responsive.css">
+
+    <link rel="stylesheet" href="css/settings-modern.css">
+
+    <link rel="stylesheet" href="css/auth.css">
+
+    <link rel="stylesheet" href="css/tema-global.css">
+
+    <link rel="stylesheet" href="css/enhanced-design.css">
+
+    <link rel="stylesheet" href="css/mobile-nav.css">
+
+</head>
+
+<body>
+
+    <!-- ========================= -->
+
+    <!-- ACCESO -->
+
+    <!-- ========================= -->
+
+    <section id="authSection" class="auth-screen">
+
+        <div class="auth-card">
+
+            <div class="auth-card-logo">
+
+                <i class="fa-solid fa-list-check"></i>
+
+                <h1>Tareas</h1>
+
+            </div>
+
+            <p class="auth-subtitle">Organiza tu semana desde cualquier lugar</p>
+
+            <div id="firebaseConfigWarning" class="auth-warning hidden">
+
+                <i class="fa-solid fa-triangle-exclamation"></i>
+
+                Firebase no está configurado. Agrega tus credenciales en
+
+                <code>js/config/firebase-config.js</code> para activar el acceso.
+
+            </div>
+
+            <div id="authTabs" class="auth-tabs">
+
+                <button type="button" class="auth-tab active" data-tab="login">
+
+                    Iniciar sesión
+
+                </button>
+
+                <button type="button" class="auth-tab" data-tab="register">
+
+                    Crear cuenta
+
+                </button>
+
+            </div>
+
+            <form id="loginForm" class="auth-form">
+
+                <div class="form-group">
+
+                    <label for="loginEmail">Correo</label>
+
+                    <input type="email" id="loginEmail" class="input" placeholder="tucorreo@ejemplo.com" required>
+
+                </div>
+
+                <div class="form-group">
+
+                    <label for="loginPassword">Contraseña</label>
+
+                    <input type="password" id="loginPassword" class="input" placeholder="••••••••" required>
+
+                </div>
+
+                <p class="auth-error" id="loginError"></p>
+
+                <button type="submit" class="btn btn-modern btn-modern-theme auth-submit">
+
+                    <i class="fa-solid fa-right-to-bracket"></i>
+
+                    Entrar
+
+                </button>
+
+            </form>
+
+            <form id="registerForm" class="auth-form hidden">
+
+                <div class="form-group">
+
+                    <label for="registerEmail">Correo</label>
+
+                    <input type="email" id="registerEmail" class="input" placeholder="tucorreo@ejemplo.com" required>
+
+                </div>
+
+                <div class="form-group">
+
+                    <label for="registerPassword">Contraseña</label>
+
+                    <input type="password" id="registerPassword" class="input" placeholder="Mínimo 6 caracteres" required>
+
+                </div>
+
+                <p class="auth-error" id="registerError"></p>
+
+                <button type="submit" class="btn btn-modern btn-modern-excel auth-submit">
+
+                    <i class="fa-solid fa-user-plus"></i>
+
+                    Crear cuenta
+
+                </button>
+
+            </form>
+
+            <div id="authLoading" class="auth-loading">
+
+                <i class="fa-solid fa-spinner fa-spin"></i>
+
+                Verificando sesión...
+
+            </div>
+
+        </div>
+
+    </section>
+
+    <!-- ========================= -->
+
+    <!-- SIDEBAR -->
+
+    <!-- ========================= -->
+
+    <aside class="sidebar hidden">
+
+        <div class="logo">
+
+            <i class="fa-solid fa-list-check"></i>
+
+            <h2>Tareas</h2>
+
+            <button type="button" id="btnCloseSidebar" class="sidebar-close" aria-label="Cerrar menú">
+
+                <i class="fa-solid fa-xmark"></i>
+
+            </button>
+
+        </div>
+
+        <nav>
+
+            <ul>
+
+                <li class="active" data-view="inicio">
+
+                    <i class="fa-solid fa-house"></i>
+
+                    <span>Inicio</span>
+
+                </li>
+
+                <li data-view="tareas">
+
+                    <i class="fa-solid fa-list"></i>
+
+                    <span>Tareas</span>
+
+                </li>
+
+                <li data-view="estadisticas">
+
+                    <i class="fa-solid fa-chart-pie"></i>
+
+                    <span>Estadísticas</span>
+
+                </li>
+
+                <li data-view="calendario">
+
+                    <i class="fa-solid fa-calendar-days"></i>
+
+                    <span>Calendario</span>
+
+                </li>
+
+                <li data-view="configuracion">
+
+                    <i class="fa-solid fa-gear"></i>
+
+                    <span>Configuración</span>
+
+                </li>
+
+            </ul>
+
+        </nav>
+
+        <div class="sidebar-user">
+
+            <div class="sidebar-user-avatar">
+
+                <i class="fa-solid fa-user"></i>
+
+            </div>
+
+            <div class="sidebar-user-info">
+
+                <span id="authUserEmail">—</span>
+
+                <button id="btnLogout" class="sidebar-logout">
+
+                    <i class="fa-solid fa-right-from-bracket"></i>
+
+                    Cerrar sesión
+
+                </button>
+
+            </div>
+
+        </div>
+
+    </aside>
+
+    <div id="sidebarOverlay" class="sidebar-overlay"></div>
+
+    <!-- ========================= -->
+
+    <!-- CONTENIDO -->
+
+    <!-- ========================= -->
+
+    <main class="main hidden">
+
+        <!-- HEADER -->
+
+        <header class="topbar">
+
+            <div class="topbar-left">
+
+                <button type="button" id="btnMenuToggle" class="menu-toggle" aria-label="Abrir menú">
+
+                    <i class="fa-solid fa-bars"></i>
+
+                </button>
+
+                <div>
+
+                    <h1>
+
+                        RESUMEN SEMANAL 
+
+                    </h1>
+
+                    <p>
+
+                        Organiza todas tus actividades desde un solo lugar.
+
+                    </p>
+
+                </div>
+
+            </div>
+
+            <div class="top-actions">
+
+                <button id="themeButton">
+
+                    <i class="fa-solid fa-moon"></i>
+
+                </button>
+
+                <button id="btnNewTask">
+
+                    <i class="fa-solid fa-plus"></i>
+
+                    Nueva tarea
+
+                </button>
+
+            </div>
+
+        </header>
+
+        <!-- INICIO -->
+
+        <section id="homeSection" class="home-container">
+
+            <div class="widget home-today">
+
+                <div class="home-today-header">
+
+                    <h2>Tareas de hoy</h2>
+
+                    <span class="badge badge-blue" id="todayLabel">Hoy</span>
+
+                </div>
+
+                <div id="todayTasksList" class="today-list">
+
+                </div>
+
+            </div>
+
+            <div class="widget home-week">
+
+                <h2>Vista semanal</h2>
+
+                <div id="weekOverview" class="week-overview">
+
+                </div>
+
+            </div>
+
+        </section>
+
+        <!-- DASHBOARD -->
+
+        <section id="dashboardSection" class="dashboard hidden">
+
+            <div class="card">
+
+                <i class="fa-solid fa-list-check"></i>
+
+                <h3>Total tareas</h3>
+
+                <span id="totalTasks">
+
+                    0
+
+                </span>
+
+            </div>
+
+            <div class="card">
+
+                <i class="fa-solid fa-circle-check"></i>
+
+                <h3>Completadas</h3>
+
+                <span id="completedTasks">
+
+                    0
+
+                </span>
+
+            </div>
+
+            <div class="card">
+
+                <i class="fa-solid fa-clock"></i>
+
+                <h3>Pendientes</h3>
+
+                <span id="pendingTasks">
+
+                    0
+
+                </span>
+
+            </div>
+
+            <div class="card">
+
+                <i class="fa-solid fa-chart-line"></i>
+
+                <h3>Progreso</h3>
+
+                <span id="progressPercent">
+
+                    0%
+
+                </span>
+
+            </div>
+
+            <div class="card">
+
+                <i class="fa-solid fa-triangle-exclamation"></i>
+
+                <h3>Prioridad alta</h3>
+
+                <span id="highPriority">
+
+                    0
+
+                </span>
+
+            </div>
+
+        </section>
+
+        <!-- BARRA DE PROGRESO -->
+
+        <section id="progressSection" class="progress-container hidden">
+
+            <div class="progress-header">
+
+                <h3>Progreso general</h3>
+
+            </div>
+
+            <div class="progress">
+
+                <div id="progressBar" class="progress-bar"></div>
+
+            </div>
+
+        </section>
+
+        <!-- FILTROS -->
+
+        <section id="filtersContainer" class="hidden">
+
+            <div class="filter-group">
+
+                <label for="searchTask">Buscar</label>
+
+                <input type="text" id="searchTask" class="input" placeholder="Buscar por título o descripción...">
+
+            </div>
+
+            <div class="filter-group">
+
+                <label for="filterPriority">Prioridad</label>
+
+                <select id="filterPriority">
+
+                    <option value="">Todas</option>
+
+                    <option value="Alta">Alta</option>
+
+                    <option value="Media">Media</option>
+
+                    <option value="Baja">Baja</option>
+
+                </select>
+
+            </div>
+
+            <div class="filter-group">
+
+                <label for="filterCategory">Categoría</label>
+
+                <select id="filterCategory">
+
+                    <option value="">Todas</option>
+
+                    <option value="Estudio">Estudio</option>
+
+                    <option value="Trabajo">Trabajo</option>
+
+                    <option value="Personal">Personal</option>
+
+                    <option value="Salud">Salud</option>
+
+                    <option value="Compras">Compras</option>
+
+                    <option value="Finanzas">Finanzas</option>
+
+                    <option value="Ocio">Ocio</option>
+
+                    <option value="Otros">Otros</option>
+
+                </select>
+
+            </div>
+
+            <div class="filter-group">
+
+                <label for="filterDay">Día</label>
+
+                <select id="filterDay">
+
+                    <option value="">Todos</option>
+
+                    <option value="Lunes">Lunes</option>
+
+                    <option value="Martes">Martes</option>
+
+                    <option value="Miércoles">Miércoles</option>
+
+                    <option value="Jueves">Jueves</option>
+
+                    <option value="Viernes">Viernes</option>
+
+                    <option value="Sábado">Sábado</option>
+
+                    <option value="Domingo">Domingo</option>
+
+                </select>
+
+            </div>
+
+            <div class="filter-group">
+
+                <label for="filterStatus">Estado</label>
+
+                <select id="filterStatus">
+
+                    <option value="">Todos</option>
+
+                    <option value="Pendiente">Pendiente</option>
+
+                    <option value="Completada">Completada</option>
+
+                </select>
+
+            </div>
+
+            <button id="btnClearFilters" class="btn btn-secondary">
+
+                <i class="fa-solid fa-filter-circle-xmark"></i>
+
+                Limpiar
+
+            </button>
+
+        </section>
+
+        <!-- LISTA -->
+
+        <section
+            id="taskContainer"
+            class="task-container hidden">
+
+        </section>
+
+        <!-- CALENDARIO -->
+
+        <section id="calendarSection" class="calendar-container hidden">
+
+            <div id="calendarGrid" class="calendar-grid">
+
+            </div>
+
+        </section>
+
+        <!-- CONFIGURACIÓN -->
+
+        <section id="settingsSection" class="widget settings-modern hidden">
+
+            <div class="settings-header">
+
+                <div class="settings-header-icon">
+                    <i class="fa-solid fa-sliders"></i>
+                </div>
+
+                <div>
+                    <h2>Configuración</h2>
+                    <p class="settings-subtitle">Personaliza Tareas a tu manera</p>
+                </div>
+
+            </div>
+
+            <div class="settings-grid">
+
+                <div class="settings-card card-theme">
+
+                    <div class="settings-card-icon">
+                        <i class="fa-solid fa-moon"></i>
+                    </div>
+
+                    <div class="settings-card-body">
+                        <h3>Tema</h3>
+                        <p>Cambia entre modo claro y oscuro.</p>
+                    </div>
+
+                    <button id="themeButtonSettings" class="btn btn-modern btn-modern-theme">
+
+                        <i class="fa-solid fa-moon"></i>
+
+                        Cambiar tema
+
+                    </button>
+
+                </div>
+
+                <div class="settings-card card-schedule">
+
+                    <div class="settings-card-icon">
+                        <i class="fa-solid fa-calendar-week"></i>
+                    </div>
+
+                    <div class="settings-card-body">
+                        <h3>Exportar horario semanal</h3>
+                        <p>Genera un horario con las tareas de la semana y descárgalo en Excel o PDF.</p>
+                    </div>
+
+                    <div class="settings-card-actions">
+
+                        <button id="btnExportExcel" class="btn btn-modern btn-modern-excel">
+
+                            <i class="fa-solid fa-file-excel"></i>
+
+                            Excel
+
+                        </button>
+
+                        <button id="btnExportPDF" class="btn btn-modern btn-modern-pdf">
+
+                            <i class="fa-solid fa-file-pdf"></i>
+
+                            PDF
+
+                        </button>
+
+                    </div>
+
+                </div>
+
+                <div class="settings-card card-danger">
+
+                    <div class="settings-card-icon">
+                        <i class="fa-solid fa-broom"></i>
+                    </div>
+
+                    <div class="settings-card-body">
+                        <h3>Eliminar completadas</h3>
+                        <p>Borra permanentemente todas las tareas marcadas como completadas.</p>
+                    </div>
+
+                    <button id="btnClearCompleted" class="btn btn-modern btn-modern-danger">
+
+                        <i class="fa-solid fa-broom"></i>
+
+                        Limpiar
+
+                    </button>
+
+                </div>
+
+            </div>
+
+        </section>
+
+    </main>
+
+    <!-- ========================= -->
+
+    <!-- MODAL -->
+
+    <!-- ========================= -->
+
+    <div
+        id="modalContainer">
+
+        <div id="taskModal" class="modal-overlay">
+
+            <div class="modal">
+
+                <div class="modal-header">
+
+                    <h2 class="modal-title">Nueva tarea</h2>
+
+                    <button type="button" class="modal-close">
+
+                        <i class="fa-solid fa-xmark"></i>
+
+                    </button>
+
+                </div>
+
+                <form>
+
+                    <div class="modal-body">
+
+                        <div class="form-group">
+
+                            <label for="title">Título</label>
+
+                            <input type="text" name="title" id="title" placeholder="Escribe el título de la tarea">
+
+                        </div>
+
+                        <div class="form-group">
+
+                            <label for="description">Descripción</label>
+
+                            <textarea name="description" id="description" class="textarea" placeholder="Escribe una descripción (opcional)"></textarea>
+
+                        </div>
+
+                        <div class="form-grid">
+
+                            <div class="form-group">
+
+                                <label for="category">Categoría</label>
+
+                                <select name="category" id="category">
+
+                                    <option value="Estudio">Estudio</option>
+
+                                    <option value="Trabajo">Trabajo</option>
+
+                                    <option value="Personal">Personal</option>
+
+                                    <option value="Salud">Salud</option>
+
+                                    <option value="Compras">Compras</option>
+
+                                    <option value="Finanzas">Finanzas</option>
+
+                                    <option value="Ocio">Ocio</option>
+
+                                    <option value="Otros" selected>Otros</option>
+
+                                </select>
+
+                            </div>
+
+                            <div class="form-group">
+
+                                <label for="priority">Prioridad</label>
+
+                                <select name="priority" id="priority">
+
+                                    <option value="Alta">Alta</option>
+
+                                    <option value="Media" selected>Media</option>
+
+                                    <option value="Baja">Baja</option>
+
+                                </select>
+
+                            </div>
+
+                            <div class="form-group">
+
+                                <label for="day">Día</label>
+
+                                <select name="day" id="day">
+
+                                    <option value="Lunes" selected>Lunes</option>
+
+                                    <option value="Martes">Martes</option>
+
+                                    <option value="Miércoles">Miércoles</option>
+
+                                    <option value="Jueves">Jueves</option>
+
+                                    <option value="Viernes">Viernes</option>
+
+                                    <option value="Sábado">Sábado</option>
+
+                                    <option value="Domingo">Domingo</option>
+
+                                </select>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                    <div class="modal-footer">
+
+                        <button type="button" class="btn btn-secondary modal-cancel">Cancelar</button>
+
+                        <button type="submit" class="btn btn-primary">
+
+                            <i class="fa-solid fa-plus"></i> Crear
+
+                        </button>
+
+                    </div>
+
+                </form>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <!-- ========================= -->
+
+    <!-- JAVASCRIPT -->
+
+    <!-- ========================= -->
+
+    <script type="module"
+            src="js/main.js">
+
+    </script>
+
+    <script type="module"
+            src="js/utils/CardGlow.js">
+
+    </script>
+
+</body>
+
+</html>

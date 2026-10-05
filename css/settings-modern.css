@@ -1,0 +1,429 @@
+/* =======================================================
+   TAREAS
+   CONFIGURACIÓN — DISEÑO MODERNO
+   Tarjetas con gradientes, glow y animaciones de entrada
+======================================================= */
+
+.settings-modern{
+
+    overflow:hidden;
+
+    position:relative;
+
+}
+
+/* =======================================================
+   ENCABEZADO
+======================================================= */
+
+.settings-header{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:18px;
+
+    padding-bottom:22px;
+
+    margin-bottom:26px;
+
+    border-bottom:1px solid var(--border);
+
+}
+
+.settings-header h2{
+
+    background:linear-gradient(120deg,#6366F1,#EC4899,#F59E0B);
+
+    background-size:200% auto;
+
+    -webkit-background-clip:text;
+
+    background-clip:text;
+
+    color:transparent;
+
+    animation:gradientShift 6s ease infinite;
+
+    font-size:24px;
+
+}
+
+.settings-subtitle{
+
+    color:var(--text-light);
+
+    font-size:14px;
+
+    margin-top:2px;
+
+}
+
+.settings-header-icon{
+
+    width:56px;
+
+    height:56px;
+
+    flex-shrink:0;
+
+    border-radius:18px;
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    font-size:24px;
+
+    color:#fff;
+
+    background:linear-gradient(135deg,#6366F1,#EC4899);
+
+    box-shadow:0 10px 25px rgba(99,102,241,.45);
+
+    animation:floatIcon 3.2s ease-in-out infinite;
+
+}
+
+@keyframes gradientShift{
+
+    0%{ background-position:0% center; }
+
+    50%{ background-position:100% center; }
+
+    100%{ background-position:0% center; }
+
+}
+
+@keyframes floatIcon{
+
+    0%,100%{ transform:translateY(0) rotate(0deg); }
+
+    50%{ transform:translateY(-6px) rotate(6deg); }
+
+}
+
+/* =======================================================
+   GRID DE TARJETAS
+======================================================= */
+
+.settings-grid{
+
+    display:grid;
+
+    grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
+
+    gap:22px;
+
+}
+
+.settings-card{
+
+    position:relative;
+
+    display:flex;
+
+    flex-direction:column;
+
+    gap:14px;
+
+    padding:24px 22px;
+
+    border-radius:22px;
+
+    background:var(--surface-2);
+
+    border:1px solid var(--border);
+
+    overflow:hidden;
+
+    opacity:0;
+
+    transform:translateY(18px);
+
+    animation:cardIn .55s ease forwards;
+
+    transition:transform .35s ease, box-shadow .35s ease, border-color .35s ease;
+
+}
+
+.settings-grid .settings-card:nth-child(1){ animation-delay:.05s; }
+.settings-grid .settings-card:nth-child(2){ animation-delay:.18s; }
+.settings-grid .settings-card:nth-child(3){ animation-delay:.31s; }
+
+@keyframes cardIn{
+
+    to{
+
+        opacity:1;
+
+        transform:translateY(0);
+
+    }
+
+}
+
+.settings-card::before{
+
+    content:"";
+
+    position:absolute;
+
+    inset:0 0 auto 0;
+
+    height:5px;
+
+    background:var(--accent-grad);
+
+}
+
+.settings-card:hover{
+
+    transform:translateY(-6px);
+
+    box-shadow:0 20px 40px var(--accent-glow);
+
+    border-color:transparent;
+
+}
+
+.card-theme{
+
+    --accent-grad:linear-gradient(90deg,#6366F1,#8B5CF6);
+
+    --accent-glow:rgba(99,102,241,.28);
+
+}
+
+.card-schedule{
+
+    --accent-grad:linear-gradient(90deg,#06B6D4,#10B981);
+
+    --accent-glow:rgba(16,185,129,.28);
+
+}
+
+.card-danger{
+
+    --accent-grad:linear-gradient(90deg,#F97316,#EF4444);
+
+    --accent-glow:rgba(239,68,68,.28);
+
+}
+
+.settings-card-icon{
+
+    width:48px;
+
+    height:48px;
+
+    border-radius:14px;
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    font-size:19px;
+
+    color:#fff;
+
+    background:var(--accent-grad);
+
+    box-shadow:0 8px 18px var(--accent-glow);
+
+    transition:transform .35s ease;
+
+}
+
+.settings-card:hover .settings-card-icon{
+
+    transform:scale(1.12) rotate(-6deg);
+
+}
+
+.settings-card-body h3{
+
+    font-size:16.5px;
+
+    margin-bottom:4px;
+
+}
+
+.settings-card-body p{
+
+    color:var(--text-light);
+
+    font-size:13.5px;
+
+    line-height:1.5;
+
+}
+
+.settings-card-actions{
+
+    display:flex;
+
+    gap:10px;
+
+    flex-wrap:wrap;
+
+}
+
+/* =======================================================
+   BOTONES MODERNOS
+======================================================= */
+
+.btn-modern{
+
+    position:relative;
+
+    display:inline-flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    gap:8px;
+
+    border:none;
+
+    outline:none;
+
+    cursor:pointer;
+
+    border-radius:12px;
+
+    padding:12px 18px;
+
+    font-size:14px;
+
+    font-weight:600;
+
+    color:#fff;
+
+    overflow:hidden;
+
+    isolation:isolate;
+
+    transition:transform .25s ease, box-shadow .25s ease;
+
+}
+
+.btn-modern::after{
+
+    content:"";
+
+    position:absolute;
+
+    inset:0;
+
+    z-index:-1;
+
+    background:inherit;
+
+    filter:brightness(1);
+
+}
+
+.btn-modern::before{
+
+    content:"";
+
+    position:absolute;
+
+    top:0;
+
+    left:-60%;
+
+    width:40%;
+
+    height:100%;
+
+    background:linear-gradient(120deg,transparent,rgba(255,255,255,.55),transparent);
+
+    transform:skewX(-20deg);
+
+    transition:left .6s ease;
+
+}
+
+.btn-modern:hover::before{
+
+    left:130%;
+
+}
+
+.btn-modern:hover{
+
+    transform:translateY(-3px);
+
+}
+
+.btn-modern:active{
+
+    transform:translateY(-1px) scale(.98);
+
+}
+
+.btn-modern-theme{
+
+    background:linear-gradient(135deg,#6366F1,#8B5CF6);
+
+    box-shadow:0 8px 18px rgba(99,102,241,.35);
+
+}
+
+.btn-modern-excel{
+
+    background:linear-gradient(135deg,#10B981,#059669);
+
+    box-shadow:0 8px 18px rgba(16,185,129,.35);
+
+}
+
+.btn-modern-pdf{
+
+    background:linear-gradient(135deg,#F87171,#DC2626);
+
+    box-shadow:0 8px 18px rgba(220,38,38,.35);
+
+}
+
+.btn-modern-danger{
+
+    background:linear-gradient(135deg,#F97316,#EF4444);
+
+    box-shadow:0 8px 18px rgba(239,68,68,.35);
+
+}
+
+/* =======================================================
+   RESPONSIVE
+======================================================= */
+
+@media (max-width:640px){
+
+    .settings-header{
+
+        flex-wrap:wrap;
+
+    }
+
+    .settings-card-actions{
+
+        width:100%;
+
+    }
+
+    .btn-modern{
+
+        flex:1;
+
+    }
+
+}

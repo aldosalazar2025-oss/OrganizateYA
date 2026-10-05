@@ -1,0 +1,1377 @@
+/* =====================================================
+   TAREAS
+   ESTILOS PRINCIPALES
+   V1.3.1
+=====================================================*/
+
+/*=========================
+    RESET
+=========================*/
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+html{
+
+    scroll-behavior:smooth;
+
+}
+
+body{
+
+    font-family:'Poppins',sans-serif;
+
+    background:var(--background);
+
+    color:var(--text);
+
+    transition:var(--transition);
+
+    overflow-x:hidden;
+
+}
+
+/*=========================
+    ENLACES
+=========================*/
+
+a{
+
+    text-decoration:none;
+
+    color:inherit;
+
+}
+
+button{
+
+    font-family:inherit;
+
+}
+
+ul{
+
+    list-style:none;
+
+}
+
+/*=========================
+    LAYOUT PRINCIPAL
+=========================*/
+
+body{
+
+    display:grid;
+
+    grid-template-columns:280px 1fr;
+
+    min-height:100vh;
+
+}
+
+/*=========================
+    SIDEBAR
+=========================*/
+
+.sidebar{
+
+    background:var(--sidebar-bg);
+
+    color:var(--sidebar-text);
+
+    padding:35px 25px;
+
+    display:flex;
+
+    flex-direction:column;
+
+    justify-content:flex-start;
+
+    gap:40px;
+
+    position:sticky;
+
+    top:0;
+
+    height:100vh;
+
+}
+
+/*=========================
+    LOGO
+=========================*/
+
+.logo{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:15px;
+
+}
+
+.logo i{
+
+    font-size:38px;
+
+    color:var(--primary);
+
+}
+
+.logo h2{
+
+    font-size:28px;
+
+    font-weight:700;
+
+}
+
+/*=========================
+    MENU
+=========================*/
+
+.sidebar nav{
+
+    width:100%;
+
+}
+
+.sidebar nav ul{
+
+    display:flex;
+
+    flex-direction:column;
+
+    gap:10px;
+
+}
+
+.sidebar nav li{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:15px;
+
+    padding:15px 18px;
+
+    border-radius:14px;
+
+    cursor:pointer;
+
+    transition:var(--transition);
+
+    font-weight:500;
+
+}
+
+.sidebar nav li:hover{
+
+    background:var(--sidebar-hover);
+
+}
+
+.sidebar nav li.active{
+
+    background:var(--sidebar-active);
+
+}
+
+.sidebar nav li i{
+
+    width:22px;
+
+    text-align:center;
+
+}
+
+/*=========================
+    MAIN
+=========================*/
+
+.main{
+
+    padding:35px;
+
+    display:flex;
+
+    flex-direction:column;
+
+    gap:30px;
+
+}
+
+/*=========================
+    TOPBAR
+=========================*/
+
+.topbar{
+
+    display:flex;
+
+    justify-content:space-between;
+
+    align-items:center;
+
+    gap:20px;
+
+}
+
+.topbar h1{
+
+    font-size:34px;
+
+    margin-bottom:5px;
+
+}
+
+.topbar p{
+
+    color:var(--text-light);
+
+}
+
+/*=========================
+    ACCIONES
+=========================*/
+
+.top-actions{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:15px;
+
+}
+
+/*=========================
+    BOTÓN MODO OSCURO
+=========================*/
+
+#themeButton{
+
+    width:50px;
+
+    height:50px;
+
+    border:none;
+
+    border-radius:50%;
+
+    background:var(--surface);
+
+    color:var(--text);
+
+    cursor:pointer;
+
+    font-size:18px;
+
+    box-shadow:var(--shadow-sm);
+
+    transition:var(--transition);
+
+}
+
+#themeButton:hover{
+
+    transform:rotate(20deg);
+
+}
+
+/*=========================
+    BOTÓN NUEVA TAREA
+=========================*/
+
+#btnNewTask{
+
+    background:var(--primary);
+
+    color:white;
+
+    border:none;
+
+    padding:15px 26px;
+
+    border-radius:14px;
+
+    cursor:pointer;
+
+    font-size:15px;
+
+    font-weight:600;
+
+    display:flex;
+
+    align-items:center;
+
+    gap:10px;
+
+    transition:var(--transition);
+
+    box-shadow:var(--shadow-sm);
+
+}
+
+#btnNewTask:hover{
+
+    background:var(--primary-hover);
+
+    transform:translateY(-3px);
+
+    box-shadow:var(--shadow-md);
+
+}
+
+/*=====================================================
+    DASHBOARD
+=====================================================*/
+
+.dashboard{
+
+    display:grid;
+
+    grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+
+    gap:25px;
+
+}
+
+/*=====================================================
+    TARJETAS
+=====================================================*/
+
+.card{
+
+    background:var(--card-bg);
+
+    border-radius:20px;
+
+    padding:28px;
+
+    box-shadow:var(--card-shadow);
+
+    transition:var(--transition);
+
+    position:relative;
+
+    overflow:hidden;
+
+}
+
+.card:hover{
+
+    transform:translateY(-8px);
+
+    box-shadow:var(--shadow-lg);
+
+}
+
+.card::before{
+
+    content:"";
+
+    position:absolute;
+
+    top:0;
+
+    left:0;
+
+    width:100%;
+
+    height:5px;
+
+    background:var(--primary);
+
+}
+
+/*=====================================================
+    ICONO
+=====================================================*/
+
+.card i{
+
+    font-size:30px;
+
+    color:var(--primary);
+
+    margin-bottom:18px;
+
+}
+
+/*=====================================================
+    TITULO
+=====================================================*/
+
+.card h3{
+
+    font-size:16px;
+
+    color:var(--text-light);
+
+    font-weight:500;
+
+}
+
+/*=====================================================
+    NUMERO
+=====================================================*/
+
+.card span{
+
+    display:block;
+
+    margin-top:12px;
+
+    font-size:34px;
+
+    font-weight:700;
+
+    color:var(--text);
+
+}
+
+/*=====================================================
+    EFECTOS DIFERENTES
+=====================================================*/
+
+.card:nth-child(1)::before{
+
+    background:#2563EB;
+
+}
+
+.card:nth-child(2)::before{
+
+    background:#10B981;
+
+}
+
+.card:nth-child(3)::before{
+
+    background:#F59E0B;
+
+}
+
+.card:nth-child(4)::before{
+
+    background:#8B5CF6;
+
+}
+
+/*=====================================================
+    CONTENEDOR PRINCIPAL
+=====================================================*/
+
+.task-container{
+
+    display:grid;
+
+    gap:20px;
+
+}
+
+/*=====================================================
+    MENSAJE VACÍO
+=====================================================*/
+
+.empty{
+
+    background:var(--surface);
+
+    padding:50px;
+
+    border-radius:20px;
+
+    text-align:center;
+
+    box-shadow:var(--shadow-sm);
+
+}
+
+.empty i{
+
+    font-size:70px;
+
+    color:var(--primary);
+
+    margin-bottom:20px;
+
+}
+
+.empty h2{
+
+    margin-bottom:10px;
+
+}
+
+.empty p{
+
+    color:var(--text-light);
+
+}
+
+/*=====================================================
+    BOTÓN GENERAL
+=====================================================*/
+
+.btn{
+
+    border:none;
+
+    border-radius:14px;
+
+    padding:14px 24px;
+
+    cursor:pointer;
+
+    font-size:15px;
+
+    font-weight:600;
+
+    transition:var(--transition);
+
+}
+
+.btn-primary{
+
+    background:var(--primary);
+
+    color:white;
+
+}
+
+.btn-primary:hover{
+
+    background:var(--primary-hover);
+
+}
+
+.btn-success{
+
+    background:var(--success);
+
+    color:white;
+
+}
+
+.btn-danger{
+
+    background:var(--danger);
+
+    color:white;
+
+}
+
+.btn-warning{
+
+    background:var(--warning);
+
+    color:white;
+
+}
+
+/*=====================================================
+    SEPARADOR
+=====================================================*/
+
+.section-title{
+
+    display:flex;
+
+    justify-content:space-between;
+
+    align-items:center;
+
+    margin-top:20px;
+
+    margin-bottom:15px;
+
+}
+
+.section-title h2{
+
+    font-size:28px;
+
+}
+
+.section-title p{
+
+    color:var(--text-light);
+
+}
+
+/*=====================================================
+    TARJETA DE TAREA
+=====================================================*/
+
+.task-card{
+
+    background:var(--card-bg);
+
+    border-radius:20px;
+
+    padding:25px;
+
+    box-shadow:var(--card-shadow);
+
+    transition:var(--transition);
+
+    border-left:6px solid var(--primary);
+
+    display:flex;
+
+    flex-direction:column;
+
+    gap:18px;
+
+    position:relative;
+
+}
+
+.task-card:hover{
+
+    transform:translateY(-6px);
+
+    box-shadow:var(--shadow-lg);
+
+}
+
+/*=====================================================
+    CABECERA
+=====================================================*/
+
+.task-header{
+
+    display:flex;
+
+    justify-content:space-between;
+
+    align-items:flex-start;
+
+    gap:15px;
+
+}
+
+.task-title{
+
+    font-size:22px;
+
+    font-weight:600;
+
+    color:var(--text);
+
+}
+
+.task-description{
+
+    margin-top:8px;
+
+    color:var(--text-light);
+
+    line-height:1.7;
+
+}
+
+/*=====================================================
+    BADGES
+=====================================================*/
+
+.task-badges{
+
+    display:flex;
+
+    flex-wrap:wrap;
+
+    gap:10px;
+
+}
+
+.badge{
+
+    padding:8px 14px;
+
+    border-radius:30px;
+
+    font-size:13px;
+
+    font-weight:600;
+
+}
+
+/* Prioridades */
+
+.badge-high{
+
+    background:#FEE2E2;
+
+    color:#DC2626;
+
+}
+
+.badge-medium{
+
+    background:#FEF3C7;
+
+    color:#D97706;
+
+}
+
+.badge-low{
+
+    background:#DCFCE7;
+
+    color:#16A34A;
+
+}
+
+/* Categoría */
+
+.badge-category{
+
+    background:#DBEAFE;
+
+    color:#2563EB;
+
+}
+
+/* Día */
+
+.badge-day{
+
+    background:#EDE9FE;
+
+    color:#7C3AED;
+
+}
+
+/*=====================================================
+    PIE DE TARJETA
+=====================================================*/
+
+.task-footer{
+
+    display:flex;
+
+    justify-content:space-between;
+
+    align-items:center;
+
+    flex-wrap:wrap;
+
+    gap:15px;
+
+}
+
+.task-info{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:15px;
+
+    color:var(--text-light);
+
+    font-size:14px;
+
+}
+
+.task-info i{
+
+    color:var(--primary);
+
+}
+
+/*=====================================================
+    BOTONES
+=====================================================*/
+
+.task-actions{
+
+    display:flex;
+
+    gap:10px;
+
+}
+
+.task-actions button{
+
+    width:42px;
+
+    height:42px;
+
+    border:none;
+
+    border-radius:12px;
+
+    cursor:pointer;
+
+    transition:var(--transition);
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+    font-size:15px;
+
+}
+
+.btn-edit{
+
+    background:#DBEAFE;
+
+    color:#2563EB;
+
+}
+
+.btn-edit:hover{
+
+    background:#2563EB;
+
+    color:white;
+
+}
+
+.btn-delete{
+
+    background:#FEE2E2;
+
+    color:#DC2626;
+
+}
+
+.btn-delete:hover{
+
+    background:#DC2626;
+
+    color:white;
+
+}
+
+.btn-check{
+
+    background:#DCFCE7;
+
+    color:#16A34A;
+
+}
+
+.btn-check:hover{
+
+    background:#16A34A;
+
+    color:white;
+
+}
+
+/*=====================================================
+    TAREA COMPLETADA
+=====================================================*/
+
+.task-completed{
+
+    opacity:.75;
+
+}
+
+.task-completed .task-title{
+
+    text-decoration:line-through;
+
+}
+
+.task-completed::after{
+
+    content:"✔";
+
+    position:absolute;
+
+    top:20px;
+
+    right:20px;
+
+    width:34px;
+
+    height:34px;
+
+    border-radius:50%;
+
+    background:var(--success);
+
+    color:white;
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+    font-size:16px;
+
+    font-weight:bold;
+
+}
+
+/*=====================================================
+    ANIMACIÓN
+=====================================================*/
+
+.task-card{
+
+    animation:fadeUp .35s ease;
+
+}
+
+@keyframes fadeUp{
+
+    from{
+
+        opacity:0;
+
+        transform:translateY(20px);
+
+    }
+
+    to{
+
+        opacity:1;
+
+        transform:translateY(0);
+
+    }
+
+}
+
+/*=====================================================
+    PANEL DE FILTROS
+=====================================================*/
+
+#filtersContainer{
+
+    background:var(--card-bg);
+
+    border-radius:20px;
+
+    padding:25px;
+
+    box-shadow:var(--card-shadow);
+
+    display:flex;
+
+    flex-wrap:wrap;
+
+    gap:20px;
+
+    align-items:flex-end;
+
+}
+
+.filter-group{
+
+    display:flex;
+
+    flex-direction:column;
+
+    gap:8px;
+
+    min-width:180px;
+
+    flex:1;
+
+}
+
+.filter-group label{
+
+    font-size:14px;
+
+    font-weight:600;
+
+    color:var(--text-light);
+
+}
+
+.filter-group input,
+.filter-group select{
+
+    height:48px;
+
+    border:1px solid var(--border);
+
+    border-radius:12px;
+
+    padding:0 15px;
+
+    background:var(--surface);
+
+    color:var(--text);
+
+    transition:var(--transition);
+
+}
+
+.filter-group input:focus,
+.filter-group select:focus{
+
+    outline:none;
+
+    border-color:var(--primary);
+
+    box-shadow:0 0 0 3px rgba(37,99,235,.15);
+
+}
+
+/*=====================================================
+    BARRA DE PROGRESO
+=====================================================*/
+
+.progress-container{
+
+    background:var(--card-bg);
+
+    padding:25px;
+
+    border-radius:20px;
+
+    box-shadow:var(--card-shadow);
+
+}
+
+.progress-header{
+
+    display:flex;
+
+    justify-content:space-between;
+
+    margin-bottom:15px;
+
+}
+
+.progress-header h3{
+
+    font-size:18px;
+
+}
+
+.progress{
+
+    width:100%;
+
+    height:14px;
+
+    background:var(--border);
+
+    border-radius:50px;
+
+    overflow:hidden;
+
+}
+
+.progress-bar{
+
+    width:0;
+
+    height:100%;
+
+    background:linear-gradient(90deg,#2563EB,#38BDF8);
+
+    transition:width .5s ease;
+
+}
+
+/*=====================================================
+    INPUTS
+=====================================================*/
+
+input,
+textarea,
+select{
+
+    font-family:inherit;
+
+    font-size:15px;
+
+}
+
+/*=====================================================
+    EFECTOS
+=====================================================*/
+
+.fade-in{
+
+    animation:fadeIn .4s ease;
+
+}
+
+@keyframes fadeIn{
+
+    from{
+
+        opacity:0;
+
+    }
+
+    to{
+
+        opacity:1;
+
+    }
+
+}
+
+.scale-in{
+
+    animation:scaleIn .35s ease;
+
+}
+
+@keyframes scaleIn{
+
+    from{
+
+        transform:scale(.9);
+
+        opacity:0;
+
+    }
+
+    to{
+
+        transform:scale(1);
+
+        opacity:1;
+
+    }
+
+}
+
+/*=====================================================
+    UTILIDADES
+=====================================================*/
+
+.hidden{
+
+    display:none !important;
+
+}
+
+.flex{
+
+    display:flex;
+
+}
+
+.flex-between{
+
+    display:flex;
+
+    justify-content:space-between;
+
+    align-items:center;
+
+}
+
+.center{
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+}
+
+.w-100{
+
+    width:100%;
+
+}
+
+.mt-10{
+
+    margin-top:10px;
+
+}
+
+.mt-20{
+
+    margin-top:20px;
+
+}
+
+.mt-30{
+
+    margin-top:30px;
+
+}
+
+.mb-10{
+
+    margin-bottom:10px;
+
+}
+
+.mb-20{
+
+    margin-bottom:20px;
+
+}
+
+.mb-30{
+
+    margin-bottom:30px;
+
+}
+
+/*=====================================================
+    LOADER
+=====================================================*/
+
+.loader{
+
+    width:50px;
+
+    height:50px;
+
+    border:5px solid var(--border);
+
+    border-top:5px solid var(--primary);
+
+    border-radius:50%;
+
+    animation:spin 1s linear infinite;
+
+    margin:auto;
+
+}
+
+@keyframes spin{
+
+    to{
+
+        transform:rotate(360deg);
+
+    }
+
+}
+
+/*=====================================================
+    ANIMACIÓN AL COMPLETAR
+=====================================================*/
+
+.task-card.completing{
+
+    animation:completePulse .45s ease;
+
+}
+
+@keyframes completePulse{
+
+    0%{
+
+        transform:scale(1);
+
+    }
+
+    35%{
+
+        transform:scale(1.025);
+
+        box-shadow:0 0 0 3px rgba(16,185,129,.35);
+
+    }
+
+    100%{
+
+        transform:scale(1);
+
+    }
+
+}
+
+.task-card.completing::after{
+
+    content:"✔";
+
+    position:absolute;
+
+    top:20px;
+
+    right:20px;
+
+    width:34px;
+
+    height:34px;
+
+    border-radius:50%;
+
+    background:var(--success);
+
+    color:white;
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+    font-size:16px;
+
+    font-weight:bold;
+
+    animation:checkPop .45s ease;
+
+}
+
+@keyframes checkPop{
+
+    0%{
+
+        transform:scale(0) rotate(-45deg);
+
+        opacity:0;
+
+    }
+
+    60%{
+
+        transform:scale(1.2) rotate(8deg);
+
+        opacity:1;
+
+    }
+
+    100%{
+
+        transform:scale(1) rotate(0);
+
+        opacity:1;
+
+    }
+
+}
+
+/*=====================================================
+    FOOTER
+=====================================================*/
+
+.footer{
+
+    margin-top:auto;
+
+    text-align:center;
+
+    color:var(--text-light);
+
+    padding:20px;
+
+    font-size:14px;
+
+}

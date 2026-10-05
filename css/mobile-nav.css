@@ -1,0 +1,196 @@
+/*======================================================
+    TAREAS
+    NAVEGACIÓN MÓVIL (ANDROID)
+    Botón hamburguesa, overlay y ajustes táctiles para
+    que el sidebar se pueda abrir/cerrar en pantallas
+    pequeñas.
+======================================================*/
+
+/*=========================
+    GRUPO IZQUIERDO TOPBAR
+=========================*/
+
+.topbar-left{
+
+    display:flex;
+    align-items:center;
+    gap:15px;
+
+}
+
+/*=========================
+    BOTÓN HAMBURGUESA
+=========================*/
+
+.menu-toggle{
+
+    display:none;
+    align-items:center;
+    justify-content:center;
+    width:44px;
+    height:44px;
+    flex-shrink:0;
+    border:none;
+    border-radius:12px;
+    background:var(--surface);
+    color:var(--text);
+    font-size:18px;
+    cursor:pointer;
+    box-shadow:var(--card-shadow);
+
+}
+
+.menu-toggle:active{
+
+    transform:scale(.94);
+
+}
+
+/*=========================
+    BOTÓN CERRAR SIDEBAR
+=========================*/
+
+.sidebar-close{
+
+    display:none;
+    margin-left:auto;
+    background:transparent;
+    border:none;
+    color:var(--sidebar-text);
+    font-size:20px;
+    line-height:1;
+    padding:8px;
+    cursor:pointer;
+
+}
+
+/*=========================
+    OVERLAY
+=========================*/
+
+.sidebar-overlay{
+
+    position:fixed;
+    inset:0;
+    background:rgba(15,23,42,.55);
+    z-index:999;
+    opacity:0;
+    visibility:hidden;
+    transition:opacity .3s ease,visibility .3s ease;
+
+}
+
+.sidebar-overlay.active{
+
+    opacity:1;
+    visibility:visible;
+
+}
+
+/*=========================
+    ACTIVAR EN MÓVIL
+=========================*/
+
+@media(max-width:992px){
+
+    .menu-toggle{
+
+        display:flex;
+
+    }
+
+    .sidebar-close{
+
+        display:block;
+
+    }
+
+    .logo{
+
+        gap:12px;
+
+    }
+
+    /* tema-global.css define .sidebar{position:relative} sin media query,
+       y al cargar después de responsive.css le gana en cascada y anulaba
+       el position:fixed que saca el sidebar de la pantalla en móvil.
+       Lo reafirmamos aquí (este archivo carga último) para que el sidebar
+       vuelva a funcionar como panel deslizante fuera de pantalla. */
+
+    .sidebar{
+
+        position:fixed !important;
+        left:-280px;
+        top:0;
+        width:280px;
+        z-index:1000;
+        transition:.35s;
+
+    }
+
+    .sidebar.active{
+
+        left:0;
+
+    }
+
+}
+
+/*=========================
+    TÁCTIL / ANDROID
+=========================*/
+
+*{
+
+    -webkit-tap-highlight-color:transparent;
+
+}
+
+button,
+.sidebar nav li,
+.task-actions button,
+.menu-toggle,
+.sidebar-close{
+
+    touch-action:manipulation;
+
+}
+
+/* Los elementos con hover no deben quedar "pegados" en activo tras un tap */
+
+@media (hover:none){
+
+    .dashboard .card:hover{
+
+        transform:none;
+
+    }
+
+}
+
+/*=========================
+    APP INSTALADA (PWA)
+    Respeta la barra de estado / gestos del sistema
+=========================*/
+
+@media (display-mode:standalone){
+
+    .topbar{
+
+        padding-top:env(safe-area-inset-top);
+
+    }
+
+    .sidebar{
+
+        padding-top:calc(35px + env(safe-area-inset-top));
+
+    }
+
+    body{
+
+        padding-bottom:env(safe-area-inset-bottom);
+
+    }
+
+}

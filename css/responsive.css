@@ -1,0 +1,324 @@
+/*======================================================
+    TAREAS
+    RESPONSIVE DESIGN
+======================================================*/
+
+/*=========================================
+    1400px
+=========================================*/
+
+@media(max-width:1400px){
+
+    .dashboard{
+
+        grid-template-columns:repeat(2,1fr);
+
+    }
+
+}
+
+/*=========================================
+    1200px
+=========================================*/
+
+@media(max-width:1200px){
+
+    body{
+
+        grid-template-columns:240px 1fr;
+
+    }
+
+    .sidebar{
+
+        padding:25px;
+
+    }
+
+    .main{
+
+        padding:25px;
+
+    }
+
+}
+
+/*=========================================
+    992px
+=========================================*/
+
+@media(max-width:992px){
+
+    body{
+
+        grid-template-columns:1fr;
+
+    }
+
+    .sidebar{
+
+        position:fixed;
+
+        left:-280px;
+
+        top:0;
+
+        width:280px;
+
+        z-index:1000;
+
+        transition:.35s;
+
+    }
+
+    .sidebar.active{
+
+        left:0;
+
+    }
+
+    .main{
+
+        width:100%;
+
+    }
+
+    .dashboard{
+
+        grid-template-columns:repeat(2,1fr);
+
+    }
+
+}
+
+/*=========================================
+    768px
+=========================================*/
+
+@media(max-width:768px){
+
+    .topbar{
+
+        flex-direction:column;
+
+        align-items:flex-start;
+
+    }
+
+    .top-actions{
+
+        width:100%;
+
+        justify-content:space-between;
+
+    }
+
+    .dashboard{
+
+        grid-template-columns:1fr;
+
+    }
+
+    .stats-grid{
+
+        grid-template-columns:1fr;
+
+    }
+
+    .task-header{
+
+        flex-direction:column;
+
+    }
+
+    .task-footer{
+
+        flex-direction:column;
+
+        align-items:flex-start;
+
+    }
+
+    .task-actions{
+
+        width:100%;
+
+    }
+
+    .task-actions button{
+
+        flex:1;
+
+    }
+
+    #filtersContainer{
+
+        flex-direction:column;
+
+    }
+
+    .filter-group{
+
+        width:100%;
+
+    }
+
+    .calendar-grid{
+
+        grid-template-columns:repeat(2,1fr);
+
+    }
+
+    .home-container{
+
+        grid-template-columns:1fr;
+
+    }
+
+    .settings-row{
+
+        flex-direction:column;
+
+        align-items:flex-start;
+
+    }
+
+}
+
+/*=========================================
+    576px
+=========================================*/
+
+@media(max-width:576px){
+
+    .main{
+
+        padding:15px;
+
+    }
+
+    .logo h2{
+
+        font-size:22px;
+
+    }
+
+    .topbar h1{
+
+        font-size:24px;
+
+    }
+
+    .card{
+
+        padding:20px;
+
+    }
+
+    .dashboard-card{
+
+        padding:20px;
+
+    }
+
+    .dashboard-number{
+
+        font-size:32px;
+
+    }
+
+    .task-card{
+
+        padding:20px;
+
+    }
+
+    .task-title{
+
+        font-size:18px;
+
+    }
+
+    .modal{
+
+        width:95%;
+
+    }
+
+}
+
+/*=========================================
+    420px
+=========================================*/
+
+@media(max-width:420px){
+
+    #btnNewTask{
+
+        width:100%;
+
+        justify-content:center;
+
+    }
+
+    .top-actions{
+
+        flex-direction:column;
+
+        gap:15px;
+
+    }
+
+    .calendar-grid{
+
+        grid-template-columns:1fr;
+
+    }
+
+    .dashboard-icon{
+
+        width:45px;
+
+        height:45px;
+
+    }
+
+    .dashboard-number{
+
+        font-size:28px;
+
+    }
+
+    .task-badges{
+
+        flex-direction:column;
+
+        align-items:flex-start;
+
+    }
+
+    .badge{
+
+        width:100%;
+
+        justify-content:center;
+
+    }
+
+}
+
+/*=========================================
+    PANTALLAS GRANDES
+=========================================*/
+
+@media(min-width:1700px){
+
+    .main{
+
+        max-width:1600px;
+
+        margin:auto;
+
+    }
+
+}
